@@ -20,7 +20,7 @@ class main {
 	public function __construct() {
 		
 		// Set default page request
-		$pageRequest = 'homepage';
+		$pageRequest = 'uploadForm';
 		// Check for parameters in URL
 		if(isset($_REQUEST['page'])) {
 			// Load the page being requested into pageRequest
@@ -43,7 +43,6 @@ abstract class page {
 	public function __construct() {
 		// Creates the heading on the webpage
 		$this->html .= '<html>';
-		$this->html .= '<link rel="stylesheet" href="styles.css">';
 		$this->html .= '<body>';
 	}
 
@@ -62,37 +61,37 @@ abstract class page {
 	}
 }
 
-class homepage extends page {
-	public function get() {
-
-	}
-}
 
 class uploadForm extends page {
 	public function get() {
-		$form = '<form action="index.php?uploadForm" method="post">';
+		$form = '<form enctype="multipart/form-data" action="upload.php" method="post">';
 		$form .= '<input type="file" name="fileToUpload" id="fileToUpload">';
 		$form .= '<input type ="submit" value="Upload File" name="submit">';
 		$form .= '</form>';
 		$this->html .= '<h1>Upload Form</h1>';
 		$this->html .= $form;
 
-		$target_dir = "uploads/";
-		$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-		$uploadOk = 1;
-		$fileType = pathinfo($target_file, PATHINFO_EXTENSION);
-
 	}
 
 	public function post() {
-		print_r($_FILES);
+		
 	}
 }
 
-class fileUpload extends page {
+
+
+class htmlTable extends page {
+
+	public function get() {
+		$this->html .= '<h1>HTML Table</h1>';
+		// $file = fopen("","r");
+		// print_r(fgetcsv($file));
+		// fclose($file);
+
+
+
+	}
 
 }
-
-class htmlTable extends page {}
 
 ?>
