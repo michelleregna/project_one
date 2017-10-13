@@ -43,6 +43,7 @@ abstract class page {
 	public function __construct() {
 		// Creates the heading on the webpage
 		$this->html .= '<html>';
+		$this->html .= '<link rel="stylesheet" href="style.css">';
 		$this->html .= '<body>';
 	}
 
@@ -83,12 +84,23 @@ class uploadForm extends page {
 class htmlTable extends page {
 
 	public function get() {
-		$this->html .= '<h1>HTML Table</h1>';
 		$fileName = $_GET['fileName'];
 		$file = fopen("/afs/cad.njit.edu/u/m/c/mcr35/public_html/project_one/uploads/".$fileName,"r");
-		print_r(fgetcsv($file));
+		$table = "<table>";
+		while (($line = fgetcsv($file)) !== false) {
+        			$table .= "<tr>";
+        	foreach ($line as $cell) {
+                $table .= "<td>" . htmlspecialchars($cell) . "</td>";
+        				}
+        		$table .= "</tr>\n";
+		
+		}
+		
 		fclose($file);
-}
+		$table .= "</table>";
+		$this->html .= $table;
+		
+	}
 
 }
 
