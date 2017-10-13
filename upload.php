@@ -1,6 +1,7 @@
 <?php
 $target_dir = "uploads/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+$fileName = basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
 $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 
@@ -21,7 +22,7 @@ if ($uploadOk == 0) {
 // if everything is ok, try to upload file
 } else {
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-        header("Location: https://web.njit.edu/~mcr35/project_one/index.php?page=htmlTable");
+        header("Location: https://web.njit.edu/~mcr35/project_one?page=htmlTable&fileName=".$fileName);
 
     } else {
         echo "Sorry, there was an error uploading your file.";

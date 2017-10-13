@@ -84,13 +84,11 @@ class htmlTable extends page {
 
 	public function get() {
 		$this->html .= '<h1>HTML Table</h1>';
-		// $file = fopen("","r");
-		// print_r(fgetcsv($file));
-		// fclose($file);
-
-
-
-	}
+		$fileName = $_GET['fileName'];
+		$file = fopen("/afs/cad.njit.edu/u/m/c/mcr35/public_html/project_one/uploads/".$fileName,"r");
+		print_r(fgetcsv($file));
+		fclose($file);
+}
 
 }
 
