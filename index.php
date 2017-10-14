@@ -65,6 +65,7 @@ abstract class page {
 
 class uploadForm extends page {
 	public function get() {
+		// Create HTML form
 		$form = '<form enctype="multipart/form-data" action="upload.php" method="post">';
 		$form .= '<input type="file" name="fileToUpload" id="fileToUpload">';
 		$form .= '<input type ="submit" value="Upload File" name="submit">';
@@ -82,10 +83,11 @@ class uploadForm extends page {
 
 
 class htmlTable extends page {
-
 	public function get() {
+		// Get filename from URL
 		$fileName = $_GET['fileName'];
 		$file = fopen("/afs/cad.njit.edu/u/m/c/mcr35/public_html/project_one/uploads/".$fileName,"r");
+		// Create HTML table
 		$table = "<table>";
 		while (($line = fgetcsv($file)) !== false) {
         			$table .= "<tr>";
