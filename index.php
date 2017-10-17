@@ -4,7 +4,7 @@
 ini_set('display_errors', 'On');
 error_reporting(E_ALL);
 
-// Class to load classes it finds the file when the program starts to fail
+// Load classes it finds the file when the program starts to fail
 class Manage {
 	public static function autoload($class) {
 		include $class . '.php';
@@ -52,16 +52,7 @@ abstract class page {
 		$this->html .= '</body></html>';
 		stringFunctions::printThis($this->html);
 	}
-
-	public function get() {
-		echo 'default get message';
-	}
-
-	public function post() {
-		print_r($_POST);
-	}
 }
-
 
 class uploadForm extends page {
 	public function get() {
@@ -72,38 +63,30 @@ class uploadForm extends page {
 		$form .= '</form>';
 		$this->html .= '<h1>Upload Form</h1>';
 		$this->html .= $form;
-
-	}
-
-	public function post() {
-		
 	}
 }
-
-
 
 class htmlTable extends page {
 	public function get() {
 		// Get filename from URL
 		$fileName = $_GET['fileName'];
 		$file = fopen("/afs/cad.njit.edu/u/m/c/mcr35/public_html/project_one/uploads/".$fileName,"r");
+		
 		// Create HTML table
 		$table = "<table>";
 		while (($line = fgetcsv($file)) !== false) {
         			$table .= "<tr>";
         	foreach ($line as $cell) {
                 $table .= "<td>" . htmlspecialchars($cell) . "</td>";
-        				}
-        		$table .= "</tr>\n";
-		
+        	}
+        	
+        	$table .= "</tr>\n";
 		}
-		
+	
 		fclose($file);
 		$table .= "</table>";
 		$this->html .= $table;
-		
 	}
-
 }
 
 ?>
